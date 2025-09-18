@@ -3,12 +3,21 @@
 namespace PrecificaçãoConfeitaria.Domain {
     public class Ingredient {
         public string Name { get; set; }
-        public double PurchasePrice { get; set; }
-        public string UnitOfMeasure { get; set; }
-        public Ingredient(string name, double purchasePrice, string unitOfMeasure) {
+        public double PricePerUnit { get; set; }
+        public UnitOfMeasure IngredientUnitOfMeasure { get; set; }
+        public Ingredient(string name, double pricePerUnit, UnitOfMeasure unitOfMeasure) {
             Name = name;
-            PurchasePrice = purchasePrice;
-            UnitOfMeasure = unitOfMeasure;
+            PricePerUnit = pricePerUnit;
+            IngredientUnitOfMeasure = unitOfMeasure;
         }
+
+        public enum UnitOfMeasure {
+            Grams,
+            Kilograms,
+            Milliliters,
+            Liters,
+            Units
+        }
+
     }
 }

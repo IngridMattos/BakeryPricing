@@ -1,7 +1,7 @@
 ﻿namespace PrecificaçãoConfeitaria.Domain {
     public class Recipe {
         public string Name { get; set; }
-        public List<Ingredient> Ingredients { get; set; }
+        public List<Ingredient> Ingredients { get; set; } = new();
         public double Amount { get; set; }
         public TimeSpan PreparationTime { get; set; }
 
@@ -11,6 +11,17 @@
             Amount = amount;
             PreparationTime = preparationTime;
         }
+
+        public double TotalPriceRecipe() {
+
+            double totalPrice = 0;
+
+            foreach (var ingredient in Ingredients) { 
+                totalPrice += ingredient.PricePerUnit * ingredient.UnitOfMeasure;
+            }
+            return totalPrice;
+
+        } 
 
     }
 }
