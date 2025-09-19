@@ -1,27 +1,17 @@
-﻿namespace PrecificaçãoConfeitaria.Domain {
+﻿using System;
+using System.Collections.Generic;
+
+namespace PrecificacaoConfeitaria.Domain.Entities {
     public class Recipe {
         public string Name { get; set; }
-        public List<Ingredient> Ingredients { get; set; } = new();
-        public double Amount { get; set; }
+        public List<RecipeItem> Ingredients { get; set; } = new();
+        public decimal Amount { get; set; } // quantidade final da receita
         public TimeSpan PreparationTime { get; set; }
 
-        public Recipe(string name, List<Ingredient> ingredients, double amount, TimeSpan preparationTime) {
+        public Recipe(string name, decimal amount, TimeSpan preparationTime) {
             Name = name;
-            Ingredients = ingredients;
             Amount = amount;
             PreparationTime = preparationTime;
         }
-
-        public double TotalPriceRecipe() {
-
-            double totalPrice = 0;
-
-            foreach (var ingredient in Ingredients) { 
-                totalPrice += ingredient.PricePerUnit * ingredient.UnitOfMeasure;
-            }
-            return totalPrice;
-
-        } 
-
     }
 }
