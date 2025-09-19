@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace PrecificacaoConfeitaria.Domain.Entities {
     public class Recipe {
         public string Name { get; set; }
-        public List<RecipeItem> Ingredients { get; set; } = new();
+        public List<RecipeItem> IngredientsAndQuantity { get; set; } = new();
         public decimal Amount { get; set; } // quantidade final da receita
         public TimeSpan PreparationTime { get; set; }
 
