@@ -1,7 +1,7 @@
 ﻿using PrecificaçãoConfeitaria.Domain;
 using PrecificaçãoConfeitaria.Domain.Enums;
 
-namespace PrecificacaoConfeitaria.Domain.Entities {
+namespace PrecificacaoConfeitaria.Domain.Entities{
     public class RecipeItem {
         public Ingredient Ingredient { get; set; }
         public decimal Quantity { get; set; }

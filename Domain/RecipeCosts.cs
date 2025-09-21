@@ -2,10 +2,11 @@
 using PrecificacaoConfeitaria.Domain.DomainServices;
 using PrecificaçãoConfeitaria.Domain.Enums;
 
-namespace PrecificaçãoConfeitaria.Domain {
+namespace PrecificacaoConfeitaria.Domain.Entities{
     public class RecipeCosts {
 
-            private UnitOfMeasure baseUnit = UnitOfMeasure.Grams;
+        private UnitOfMeasure baseUnit = UnitOfMeasure.Grams;
+
         public decimal CalculateTotalRecipeCost(Recipe recipe) {
             decimal totalRecipeCost = 0m;
             foreach (var i in recipe.IngredientsAndQuantity) {

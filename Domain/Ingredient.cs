@@ -1,6 +1,6 @@
 ﻿using PrecificaçãoConfeitaria.Domain.Enums;
 
-namespace PrecificacaoConfeitaria.Domain.Entities {
+namespace PrecificacaoConfeitaria.Domain.Entities{
     public class Ingredient {
         public string Name { get; set; }
         public decimal PricePerUnit { get; set; } // preço por unidade base
