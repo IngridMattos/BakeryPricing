@@ -38,7 +38,7 @@ var ingredientePreco = decimal.Parse(Console.ReadLine(), CultureInfo.InvariantCu
 
 // Crio Primeiro Ingrediente
 var ingrediente = new Ingredient(ingredienteNome, ingredientePreco);
-Console.WriteLine($"Ingrediente criado: Nome={ingrediente.Name}, Preço={ingrediente.PricePerUnit}");
+Console.WriteLine($"Ingrediente criado: Nome={ingrediente.Name}, Preço={ingrediente.PricePerKilogram}");
 
 Console.WriteLine("Entre com a quantidade do ingrediente na receita:  ");
 var QuantidadeDoIngredienteNaReceita = decimal.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
@@ -61,7 +61,7 @@ var ingredientePreco2 = decimal.Parse(Console.ReadLine(), CultureInfo.InvariantC
 
 
 var ingrediente2 = new Ingredient(ingredienteNome2, ingredientePreco2);
-Console.WriteLine($"Ingrediente criado: Nome={ingrediente2.Name}, Preço={ingrediente2.PricePerUnit}");
+Console.WriteLine($"Ingrediente criado: Nome={ingrediente2.Name}, Preço={ingrediente2.PricePerKilogram}");
 
 Console.WriteLine("Entre com a quantidade do ingrediente na receita:  ");
 var QuantidadeDoIngredienteNaReceita2 = decimal.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
