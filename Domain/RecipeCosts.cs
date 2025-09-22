@@ -5,7 +5,7 @@ using PrecificaçãoConfeitaria.Domain.Enums;
 namespace PrecificacaoConfeitaria.Domain.Entities{
     public class RecipeCosts {
 
-        private UnitOfMeasure baseUnit = UnitOfMeasure.Grams;
+        private UnitOfMeasure baseUnit = UnitOfMeasure.Kilograms;
 
         public decimal CalculateTotalRecipeCost(Recipe recipe) {
             decimal totalRecipeCost = 0m;

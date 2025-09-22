@@ -33,24 +33,17 @@ todosApi.MapGet("/{id}", (int id) =>
 Console.WriteLine("Entre com o nome do ingrediente das suas receitas: ");
 var ingredienteNome = Console.ReadLine();
 
-Console.WriteLine("Entre com o preço do ingrediente: ");
+Console.WriteLine("Entre com o preço do ingrediente por kg: ");
 var ingredientePreco = decimal.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
 
-Console.WriteLine("Entre com a unidade de medida do ingrediente (Grams, Kilograms, Milliliters, Liters): ");
-var ingredientMedida = Console.ReadLine();
-
-var medidaEnum = Enum.GetValues(typeof(UnitOfMeasure))
- .Cast<UnitOfMeasure>()
- .FirstOrDefault(e => e.ToString().Equals(ingredientMedida, StringComparison.OrdinalIgnoreCase));
-
 // Crio Primeiro Ingrediente
-var ingrediente = new Ingredient(ingredienteNome, ingredientePreco, medidaEnum);
-Console.WriteLine($"Ingrediente criado: Nome={ingrediente.Name}, Preço={ingrediente.PricePerUnit}, Unidade={ingrediente.IngredientUnitOfMeasure}");
+var ingrediente = new Ingredient(ingredienteNome, ingredientePreco);
+Console.WriteLine($"Ingrediente criado: Nome={ingrediente.Name}, Preço={ingrediente.PricePerUnit}");
 
 Console.WriteLine("Entre com a quantidade do ingrediente na receita:  ");
 var QuantidadeDoIngredienteNaReceita = decimal.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
 
-Console.WriteLine("Entre com a unidade de medida do ingrediente na receita (Grams, Kilograms, Milliliters, Liters): ");
+Console.WriteLine("Quanto a receita pede? (Grams, Kilograms, Milliliters, Liters): ");
 var UnidadeDeMedidaNaReceita = Console.ReadLine();
 
 var medidaIngredienteReceita = Enum.GetValues(typeof(UnitOfMeasure)).Cast<UnitOfMeasure>().FirstOrDefault(e => e.ToString().Equals(UnidadeDeMedidaNaReceita, StringComparison.OrdinalIgnoreCase));
@@ -63,23 +56,17 @@ Console.WriteLine($"Item da receita criado: Ingrediente={receitaItem.Ingredient.
 Console.WriteLine("Entre com o nome do SEGUNDO ingrediente das suas receitas: ");
 var ingredienteNome2 = Console.ReadLine();
 
-Console.WriteLine("Entre com o preço do ingrediente: ");
+Console.WriteLine("Entre com o preço do ingrediente2 tbm em kg: ");
 var ingredientePreco2 = decimal.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
 
-Console.WriteLine("Entre com a unidade de medida do ingrediente (Grams, Kilograms, Milliliters, Liters): ");
-var ingredientMedida2 = Console.ReadLine();
 
-var medidaEnum2 = Enum.GetValues(typeof(UnitOfMeasure))
- .Cast<UnitOfMeasure>()
- .FirstOrDefault(e => e.ToString().Equals(ingredientMedida2, StringComparison.OrdinalIgnoreCase));
-
-var ingrediente2 = new Ingredient(ingredienteNome2, ingredientePreco2, medidaEnum2);
-Console.WriteLine($"Ingrediente criado: Nome={ingrediente2.Name}, Preço={ingrediente2.PricePerUnit}, Unidade={ingrediente2.IngredientUnitOfMeasure}");
+var ingrediente2 = new Ingredient(ingredienteNome2, ingredientePreco2);
+Console.WriteLine($"Ingrediente criado: Nome={ingrediente2.Name}, Preço={ingrediente2.PricePerUnit}");
 
 Console.WriteLine("Entre com a quantidade do ingrediente na receita:  ");
 var QuantidadeDoIngredienteNaReceita2 = decimal.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
 
-Console.WriteLine("Entre com a unidade de medida do ingrediente na receita (Grams, Kilograms, Milliliters, Liters): ");
+Console.WriteLine("Entre com quantidade do ingrediente na receita (Grams, Kilograms, Milliliters, Liters): ");
 var UnidadeDeMedidaNaReceita2 = Console.ReadLine();
 
 var medidaIngredienteReceita2 = Enum.GetValues(typeof(UnitOfMeasure))
@@ -87,7 +74,7 @@ var medidaIngredienteReceita2 = Enum.GetValues(typeof(UnitOfMeasure))
     .FirstOrDefault(e => e.ToString().Equals(UnidadeDeMedidaNaReceita2, StringComparison.OrdinalIgnoreCase));
 
 var receitaItem2 = new RecipeItem(ingrediente2, QuantidadeDoIngredienteNaReceita2, medidaIngredienteReceita2);
-Console.WriteLine($"Item da receita criado: Ingrediente={receitaItem2.Ingredient.Name}, Quantidade={receitaItem2.Quantity}, Unidade={receitaItem2.Unit}");
+Console.WriteLine($"Item da receita criado: Ingrediente={receitaItem2.Ingredient.Name}, Quantidade={receitaItem2.Quantity}, Unidade={receitaItem2 .Unit}");
 // criação da receita
 Console.WriteLine("Entre com o nome da receita: ");
 var nomeDaReceita = Console.ReadLine();
