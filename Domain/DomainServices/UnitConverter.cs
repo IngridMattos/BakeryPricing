@@ -1,12 +1,15 @@
 ﻿using PrecificaçãoConfeitaria.Domain.Enums;
 
 namespace PrecificacaoConfeitaria.Domain.DomainServices {
-    public static class UnitConverter {
-        public static decimal Convert(decimal quantity, UnitOfMeasure from, UnitOfMeasure to) {
+    public static class UnitConverter
+    {
+        public static decimal Convert(decimal quantity, UnitOfMeasure from, UnitOfMeasure to, decimal pricePerUnit = 0)
+        {
             if (from == to)
                 return quantity;
 
-            switch (from) {
+            switch (from)
+            {
                 case UnitOfMeasure.Grams:
                     if (to == UnitOfMeasure.Kilograms) return quantity / 1000m;
                     if (to == UnitOfMeasure.Milliliters) return quantity;   // assumindo densidade = 1
@@ -32,7 +35,13 @@ namespace PrecificacaoConfeitaria.Domain.DomainServices {
                     break;
 
                 case UnitOfMeasure.Units:
-                    throw new InvalidOperationException("Conversão de 'Units' não é suportada.");
+                    if (to == UnitOfMeasure.Kilograms)
+                    {
+                        if (pricePerUnit <= 0)
+                            throw new InvalidOperationException("Peso por unidade deve ser informado para conversão de unidades.");
+                        return quantity * pricePerUnit;
+                    }
+                    throw new InvalidOperationException("Conversão de 'Units' para a unidade solicitada não suportada.");
             }
 
             throw new NotSupportedException($"Conversão de {from} para {to} não suportada.");
