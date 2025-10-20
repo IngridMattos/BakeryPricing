@@ -1,4 +1,4 @@
-﻿using PrecificaçãoConfeitaria.Domain.Enums;
+﻿using PrecificacaoConfeitaria.Domain.Enums;
 
 namespace PrecificacaoConfeitaria.Domain.Entities{
     public class Ingredient

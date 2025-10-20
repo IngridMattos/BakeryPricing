@@ -1,6 +1,6 @@
-﻿using PrecificaçãoConfeitaria.Domain.Enums;
+﻿using PrecificacaoConfeitaria.Domain.Enums;
 
-namespace PrecificacaoConfeitaria.Domain.DomainServices {
+namespace PrecificacaoConfeitaria.Domain.Services {
     public static class UnitConverter
     {
         public static decimal Convert(decimal quantity, UnitOfMeasure from, UnitOfMeasure to, decimal pricePerUnit = 0)
