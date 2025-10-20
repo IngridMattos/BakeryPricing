@@ -2,7 +2,8 @@
 using PrecificacaoConfeitaria.Domain.DomainServices;
 using PrecificaçãoConfeitaria.Domain.Enums;
 
-namespace PrecificacaoConfeitaria.Domain.Entities{
+namespace PrecificacaoConfeitaria.Domain.Entities
+{
     public class RecipeCosts
     {
         private UnitOfMeasure baseUnit = UnitOfMeasure.Kilograms;
@@ -13,22 +14,19 @@ namespace PrecificacaoConfeitaria.Domain.Entities{
 
             foreach (var item in recipe.IngredientsAndQuantity)
             {
-                decimal weightInKg;
-
                 if (item.Unit == UnitOfMeasure.Units)
                 {
-                    weightInKg = UnitConverter.Convert(item.Quantity, UnitOfMeasure.Units, baseUnit, item.Ingredient.PricePerUnit);
+                    decimal pricePerSingleUnit = item.Ingredient.PricePerUnit / item.Ingredient.UnitsPerPackage;
+                    totalRecipeCost += pricePerSingleUnit * item.Quantity;
                 }
                 else
                 {
-                    weightInKg = UnitConverter.Convert(item.Quantity, item.Unit, baseUnit);
+                    decimal weightInKg = UnitConverter.Convert(item.Quantity, item.Unit, UnitOfMeasure.Kilograms);
+                    totalRecipeCost += weightInKg * item.Ingredient.PricePerKilogram;
                 }
-
-                totalRecipeCost += item.Ingredient.PricePerKilogram * weightInKg;
             }
 
             return totalRecipeCost;
         }
     }
-
 }
