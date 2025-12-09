@@ -1,19 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using PrecificacaoConfeitaria.Domain.Enums;
+﻿using System.Collections.Generic;
 
-namespace PrecificacaoConfeitaria.Domain.Entities{
+namespace PrecificacaoConfeitaria.Domain.Entities {
     public class Recipe {
         public string Name { get; set; }
-        public List<RecipeItem> IngredientsAndQuantity { get; set; } = new();
-        public decimal Amount { get; set; } // quantidade final da receita
-        public TimeSpan PreparationTime { get; set; }
+        public List<RecipeComponent> Components { get; set; } = new();
+        public decimal TotalWeight => CalculateTotalWeight();
+        public decimal TotalCost => CalculateTotalCost();
 
-        public Recipe(string name, List<RecipeItem> ingredientsAndQuantity) {
+        public Recipe(string name) {
             Name = name;
-            IngredientsAndQuantity = ingredientsAndQuantity;
-            //Amount = amount;
-            //PreparationTime = preparationTime;
+        }
+
+        public void AddComponent(RecipeComponent component) {
+            Components.Add(component);
+        }
+
+        private decimal CalculateTotalWeight() {
+            decimal totalWeight = 0;
+            foreach (var component in Components) {
+                totalWeight += component.WeightInKilograms;
+            }
+            return totalWeight;
+        }
+
+        private decimal CalculateTotalCost() {
+            decimal totalCost = 0;
+            foreach (var component in Components) {
+                totalCost += component.CalculateCost();
+            }
+            return totalCost;
         }
     }
 }

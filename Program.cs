@@ -14,84 +14,50 @@ builder.Services.ConfigureHttpJsonOptions(options =>
 
 var app = builder.Build();
 
-// === Entrada de dados do usuário para criar a receita === \o/
-List<RecipeItem> recipeItems = new List<RecipeItem>();
+
+
+// -------------------------------------------//
+// Simulação de componentes registrados
+var availableComponents = new List<RecipeComponent>
+{
+    new("Massa de Chocolate", RecipeComponentCategory.Massa, 20m, 1m),
+    new("Recheio de Brigadeiro", RecipeComponentCategory.Recheio, 30m, 1m),
+    new("Cobertura de Morango", RecipeComponentCategory.Cobertura, 25m, 1m)
+};
+
+var recipeBuilder = new RecipeBuilder(availableComponents);
+
+// Montar receita
+Console.WriteLine("Digite o nome da nova receita:");
+string recipeName = Console.ReadLine() ?? "Receita Sem Nome";
+
+var selectedComponents = new List<(string componentName, decimal weight)>();
 
 while (true)
 {
-    Console.WriteLine("Digite o nome do ingrediente:");
-    string ingredientName = Console.ReadLine() ?? "";
-
-    Console.WriteLine("O ingrediente é vendido por unidade? (s/n):");
-    string soldByUnit = Console.ReadLine()?.ToLower() ?? "n";
-
-    Ingredient ingredient;
-
-    if (soldByUnit == "s")
+    Console.WriteLine("Selecione um componente disponível:");
+    foreach (var component in availableComponents)
     {
-        Console.WriteLine("Digite o preço por pacote/unidade do ingrediente:");
-        decimal pricePerUnit = decimal.Parse(Console.ReadLine()!, CultureInfo.InvariantCulture);
-
-        Console.WriteLine("Quantas unidades vem no pacote?");
-        int unitsPerPackage = int.Parse(Console.ReadLine()!);
-
-        ingredient = new Ingredient(ingredientName, 0, UnitOfMeasure.Units, pricePerUnit)
-        {
-            UnitsPerPackage = unitsPerPackage
-        };
-    }
-    else
-    {
-        Console.WriteLine("Digite o preço por kg:");
-        decimal pricePerKg = decimal.Parse(Console.ReadLine()!, CultureInfo.InvariantCulture);
-
-        ingredient = new Ingredient(ingredientName, pricePerKg);
+        Console.WriteLine($"- {component.Name} ({component.Category}) - R$ {component.PricePerKilogram}/kg");
     }
 
-    Console.WriteLine("Digite a quantidade do ingrediente na receita:");
-    decimal quantity = decimal.Parse(Console.ReadLine()!, CultureInfo.InvariantCulture);
+    Console.WriteLine("Digite o nome do componente:");
+    string componentName = Console.ReadLine() ?? "";
 
-    UnitOfMeasure unit;
-    if (ingredient.Unit == UnitOfMeasure.Units)
-    {
-        unit = UnitOfMeasure.Units;
-        Console.WriteLine("Ingrediente vendido por unidade, unidade da receita definida automaticamente como 'Units'.");
-    }
-    else
-    {
-        Console.WriteLine("Digite a unidade de medida (Grams, Kilograms, Milliliters, Liters):");
-        string unitInput = Console.ReadLine() ?? "Grams";
+    Console.WriteLine("Digite o peso (em kg) para este componente:");
+    decimal weight = decimal.Parse(Console.ReadLine()!);
 
-        unit = Enum.TryParse(unitInput, true, out UnitOfMeasure parsedUnit) ? parsedUnit : UnitOfMeasure.Grams;
-    }
+    selectedComponents.Add((componentName, weight));
 
-    var recipeItem = new RecipeItem(ingredient, quantity, unit);
-    recipeItems.Add(recipeItem);
-
-    Console.WriteLine($"Ingrediente adicionado à receita: Nome={ingredient.Name}, Quantidade={quantity}, Unidade={unit}");
-
-    Console.WriteLine("Deseja adicionar outro ingrediente? (s/n):");
-    string addAnother = Console.ReadLine()?.ToLower() ?? "n";
-    if (addAnother != "s") break;
+    Console.WriteLine("Deseja adicionar outro componente? (s/n):");
+    if (Console.ReadLine()?.ToLower() != "s") break;
 }
 
-// Criação da receita
-Console.WriteLine("Digite o nome da receita:");
-string recipeName = Console.ReadLine() ?? "Receita";
-var recipe = new Recipe(recipeName, recipeItems);
+var newRecipe = recipeBuilder.BuildRecipe(recipeName, selectedComponents);
 
-// === Cálculo do custo da receita ===
-var recipeCostsService = new RecipeCosts();
-decimal totalCost = recipeCostsService.CalculateTotalRecipeCost(recipe);
-Console.WriteLine($"\nCusto total da receita \"{recipe.Name}\": {totalCost:C}");
-
-// === Cálculo do preço final com margem de lucro ===
-Console.WriteLine("Digite a margem de lucro desejada (%) sobre o custo da receita:");
-decimal profitPercentage = decimal.Parse(Console.ReadLine()!, CultureInfo.InvariantCulture);
-
-var pricingService = new RecipePricingService();
-decimal finalPrice = pricingService.CalculateFinalPrice(recipe, profitPercentage);
-Console.WriteLine($"Preço final da receita com {profitPercentage}% de lucro: {finalPrice:C}");
+Console.WriteLine($"\nReceita \"{newRecipe.Name}\" montada com sucesso!");
+Console.WriteLine($"Peso total: {newRecipe.TotalWeight} kg");
+Console.WriteLine($"Custo total: {newRecipe.TotalCost:C}");
 
 // --------------------------------------------//
 
