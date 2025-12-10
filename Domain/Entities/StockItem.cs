@@ -1,19 +1,19 @@
-using PrecificacaoConfeitaria.Domain.Enums;
+using PrecificacaoConfeitaria.Domain.Entities;
 
 namespace PrecificacaoConfeitaria.Domain.Entities {
     public class StockItem {
         public Ingredient Ingredient { get; set; }
         public decimal WeightInKilograms { get; set; }
-        public decimal PurchasePrice { get; set; } // Valor total pago pelo peso registrado
+        public decimal TotalPrice { get; set; }
 
-        public StockItem(Ingredient ingredient, decimal weightInKilograms, decimal purchasePrice) {
+        public StockItem(Ingredient ingredient, decimal weightInKg, decimal totalPrice) {
             Ingredient = ingredient;
-            WeightInKilograms = weightInKilograms;
-            PurchasePrice = purchasePrice;
+            WeightInKilograms = weightInKg;
+            TotalPrice = totalPrice;
         }
 
         public decimal CalculateCostPerKilogram() {
-            return PurchasePrice / WeightInKilograms;
+            return TotalPrice / WeightInKilograms;
         }
     }
 }

@@ -2,22 +2,25 @@
 
 namespace PrecificacaoConfeitaria.Domain.Entities {
     public class RecipeComponent {
-        public string Name { get; set; }
+        public Ingredient Ingredient { get; set; }
+        public decimal Quantity { get; set; } // em unidade definida pelo Ingredient
         public RecipeComponentCategory Category { get; set; }
-        public decimal PricePerKilogram { get; set; }
-        public decimal WeightInKilograms { get; set; }
 
-        public RecipeComponent(string name, RecipeComponentCategory category, decimal pricePerKilogram, decimal weightInKilograms) {
-            Name = name;
+        public RecipeComponent(Ingredient ingredient, decimal quantity, RecipeComponentCategory category) {
+            Ingredient = ingredient;
+            Quantity = quantity;
             Category = category;
-            var componentsInCategory = _recipeComponents.Where(c => c.Category.Name == category.Name).ToList();
-            var recipesInCategory = _recipes.Where(r => r.Components.Any(c => c.Category.Name == category.Name)).ToList();
-            PricePerKilogram = pricePerKilogram;
-            WeightInKilograms = weightInKilograms;
         }
 
-        public decimal CalculateCost() {
-            return PricePerKilogram * WeightInKilograms;
+        public decimal WeightInKilograms =>
+            Ingredient.Unit == UnitOfMeasure.Kilograms ?
+                Quantity :
+            Ingredient.Unit == UnitOfMeasure.Grams ?
+                Quantity / 1000m :
+                0; // produtos unitários não têm peso automático
+
+        public decimal CalculateCost(decimal costPerKgFromStock) {
+            return WeightInKilograms * costPerKgFromStock;
         }
     }
 }
