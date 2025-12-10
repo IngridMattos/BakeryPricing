@@ -10,6 +10,8 @@ namespace PrecificacaoConfeitaria.Domain.Entities {
         public RecipeComponent(string name, RecipeComponentCategory category, decimal pricePerKilogram, decimal weightInKilograms) {
             Name = name;
             Category = category;
+            var componentsInCategory = _recipeComponents.Where(c => c.Category.Name == category.Name).ToList();
+            var recipesInCategory = _recipes.Where(r => r.Components.Any(c => c.Category.Name == category.Name)).ToList();
             PricePerKilogram = pricePerKilogram;
             WeightInKilograms = weightInKilograms;
         }

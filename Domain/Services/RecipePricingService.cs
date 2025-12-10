@@ -6,11 +6,11 @@ namespace PrecificacaoConfeitaria.Domain.Services {
 
     public class RecipePricingService {
 
-        private readonly RecipeCosts _recipeCosts; //Encapsulamento: _recipeCosts é privado, protegendo a lógica interna.
-        //readonly garante que ela só será atribuída no construtor, impedindo alteração posterior — bom para imutabilidade e segurança de dados.
+        private readonly RecipeCosts _recipeCosts;
 
-        public RecipePricingService() {
-            _recipeCosts = new RecipeCosts();
+        public RecipePricingService(StockService stockService) {
+            _recipeCosts = new RecipeCosts(stockService);
+            var recipeComponent = new RecipeComponent(recipeName, RecipeComponentCategory.Massa, recipePricePerKg, recipeWeight);
         }
 
         public decimal CalculateFinalPrice(Recipe recipe, decimal profitPercentage) {
