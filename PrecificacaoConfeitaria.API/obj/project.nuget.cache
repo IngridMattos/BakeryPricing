@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "xvepNRBzhTA=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ingri\\Estudos\\SistemaDePrecificaçãoConfeitaria\\Backend\\PrecificacaoConfeitaria.API\\PrecificacaoConfeitaria.API.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ingri\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.2\\microsoft.aspnetcore.openapi.9.0.2.nupkg.sha512",
+    "C:\\Users\\ingri\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
