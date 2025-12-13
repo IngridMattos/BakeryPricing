@@ -2,23 +2,17 @@ using PrecificacaoConfeitaria.Domain.Entities;
 
 namespace PrecificacaoConfeitaria.Domain.Services {
     public class IndirectCostAllocator {
-        private readonly IEnumerable<IndirectCost> _indirectCosts;
-        private readonly decimal _totalKilogramsProducedInMonth;
+        private readonly IEnumerable<IndirectCost> _costs;
+        private readonly decimal _monthlyKg;
 
-        public IndirectCostAllocator(IEnumerable<IndirectCost> indirectCosts, decimal totalKilogramsProducedInMonth) {
-            _indirectCosts = indirectCosts;
-            _totalKilogramsProducedInMonth = totalKilogramsProducedInMonth;
+        public IndirectCostAllocator(IEnumerable<IndirectCost> costs, decimal monthlyKg) {
+            _costs = costs;
+            _monthlyKg = monthlyKg;
         }
 
-        public decimal GetIndirectCostPerKg() {
-            var totalIndirectCosts = _indirectCosts.Sum(c => c.Amount);
-            if (_totalKilogramsProducedInMonth == 0) return 0;
-            return totalIndirectCosts / _totalKilogramsProducedInMonth;
-        }
-
-        public decimal AllocateToRecipe(decimal recipeTotalWeightKg) {
-            var costPerKg = GetIndirectCostPerKg();
-            return recipeTotalWeightKg * costPerKg;
+        public decimal CostPerKg() {
+            if (_monthlyKg == 0) return 0;
+            return _costs.Sum(c => c.Amount) / _monthlyKg;
         }
     }
 }

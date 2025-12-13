@@ -1,13 +1,11 @@
 namespace PrecificacaoConfeitaria.Domain.Entities {
-    public class StockItem {
+    public class RecipePartIngredient {
         public Ingredient Ingredient { get; }
         public decimal QuantityInKg { get; }
-        public decimal TotalPrice { get; }
 
-        public StockItem(Ingredient ingredient, decimal quantityInKg, decimal totalPrice) {
+        public RecipePartIngredient(Ingredient ingredient, decimal quantityInKg) {
             Ingredient = ingredient;
             QuantityInKg = quantityInKg;
-            TotalPrice = totalPrice;
         }
     }
 }

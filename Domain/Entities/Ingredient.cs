@@ -2,23 +2,12 @@
 
 namespace PrecificacaoConfeitaria.Domain.Entities {
     public class Ingredient {
-        public string Name { get; set; }
-        public decimal PricePerKilogram { get; set; }
-        public decimal PricePerUnit { get; set; }
-        public int UnitsPerPackage { get; set; }
-        public UnitOfMeasure Unit { get; set; }
+        public string Name { get; }
+        public IngredientMeasureType MeasureType { get; }
 
-        public Ingredient(
-            string name,
-            decimal pricePerKilogram,
-            UnitOfMeasure unit = UnitOfMeasure.Kilograms,
-            decimal pricePerUnit = 0,
-            int unitsPerPackage = 1) {
+        public Ingredient(string name, IngredientMeasureType measureType) {
             Name = name;
-            PricePerKilogram = pricePerKilogram;
-            Unit = unit;
-            UnitsPerPackage = unitsPerPackage;
-            PricePerUnit = pricePerUnit;
+            MeasureType = measureType;
         }
     }
 }

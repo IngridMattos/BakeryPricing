@@ -1,4 +1,4 @@
-using System.Globalization;
+Ôªøusing System.Globalization;
 using PrecificacaoConfeitaria.Domain.Entities;
 using PrecificacaoConfeitaria.Domain.Enums;
 using PrecificacaoConfeitaria.Domain.Services;
@@ -7,189 +7,86 @@ var builder = WebApplication.CreateSlimBuilder(args);
 var app = builder.Build();
 
 // -------------------------------------------//
-// InicializaÁ„o dos serviÁos da camada de domÌnio
+// Inicializa√ß√£o dos servi√ßos da camada de dom√≠nio
 
+Console.WriteLine("=== TESTE SISTEMA DE PRECIFICA√á√ÉO CONFEITARIA ===");
+
+// --------------------------------------------------
+// 1Ô∏è‚É£ ESTOQUE (tudo em KG internamente)
+
+// Farinha: 5kg por R$ 25
+var farinha = new Ingredient("Farinha", IngredientMeasureType.Weight);
 var stockService = new StockService();
-var indirectCosts = new List<IndirectCost>();
-var recipes = new List<Recipe>();
+stockService.AddStockItem(new StockItem(
+    farinha,
+    quantityInKg: 5m,
+    totalPrice: 25m
+));
 
-// -------------------------------------------//
-// Menu principal
+// Ovo: 30 unidades, 50g cada = 1.5kg por R$ 24
+var ovo = new Ingredient("Ovo", IngredientMeasureType.Weight);
+stockService.AddStockItem(new StockItem(
+    ovo,
+    quantityInKg: 1.5m,
+    totalPrice: 24m
+));
 
-while (true)
+Console.WriteLine("‚úî Estoque cadastrado");
+
+// --------------------------------------------------
+// 2Ô∏è‚É£ PARTES DE RECEITA (massa, recheio, cobertura...)
+
+var massaType = new RecipePartType("Massa");
+var recheioType = new RecipePartType("Recheio");
+
+// Massa de chocolate (para teste vamos usar farinha + ovo)
+var massaChocolate = new RecipePart("Massa de Chocolate", massaType);
+massaChocolate.AddIngredient(new RecipePartIngredient(farinha, 0.3m)); // 300g
+massaChocolate.AddIngredient(new RecipePartIngredient(ovo, 0.2m));     // 200g
+
+// Recheio simples
+var recheio = new RecipePart("Recheio Simples", recheioType);
+recheio.AddIngredient(new RecipePartIngredient(ovo, 0.1m)); // 100g
+
+Console.WriteLine("‚úî Partes de receita criadas");
+
+// --------------------------------------------------
+// 3Ô∏è‚É£ RECEITA PERSONALIZADA (cliente escolhe as partes)
+
+var customRecipe = new CustomRecipe("Cliente Maria");
+customRecipe.AddPart(massaChocolate);
+customRecipe.AddPart(recheio);
+
+Console.WriteLine("‚úî Receita personalizada montada");
+
+// --------------------------------------------------
+// 4Ô∏è‚É£ CUSTOS INDIRETOS MENSAIS
+
+var indirectCosts = new List<IndirectCost>
 {
-    Console.WriteLine("\n=== Sistema de PrecificaÁ„o Confeitaria ===");
-    Console.WriteLine("1. Registrar Ingrediente e Estoque");
-    Console.WriteLine("2. Registrar Custo Indireto Mensal");
-    Console.WriteLine("3. Registrar Receita");
-    Console.WriteLine("4. Calcular Custo de uma Receita");
-    Console.WriteLine("5. Listar Receitas e Custos");
-    Console.WriteLine("6. Sair");
-    Console.Write("Escolha uma opÁ„o: ");
-    string? option = Console.ReadLine();
+    new("Aluguel", 1200m),
+    new("Luz", 300m),
+    new("√Ågua", 150m)
+};
 
-    switch (option)
-    {
-        case "1":
-            RegisterIngredientAndStock(stockService);
-            break;
-        case "2":
-            RegisterIndirectCost(indirectCosts);
-            break;
-        case "3":
-            RegisterRecipe(recipes, stockService);
-            break;
-        case "4":
-            PriceRecipe(recipes, stockService, indirectCosts);
-            break;
-        case "5":
-            ListAllRecipes(recipes);
-            break;
-        case "6":
-            Console.WriteLine("Saindo do sistema...");
-            return;
-        default:
-            Console.WriteLine("OpÁ„o inv·lida. Tente novamente.");
-            break;
-    }
-}
+// Produ√ß√£o mensal estimada: 100kg
+var allocator = new IndirectCostAllocator(indirectCosts, monthlyKg: 100m);
 
-// -------------------------------------------//
-// FunÁıes auxiliares
+// --------------------------------------------------
+// 5Ô∏è‚É£ C√ÅLCULO FINAL
 
-void RegisterIngredientAndStock(StockService stockService)
-{
-    Console.WriteLine("\n=== Registrar Ingrediente ===");
+var partCostService = new RecipePartCostService(stockService);
+var pricingService = new RecipePricingService(partCostService, allocator);
 
-    Console.Write("Nome do ingrediente: ");
-    string name = Console.ReadLine() ?? "";
+// Margem de lucro: 30%
+decimal finalPrice = pricingService.Calculate(customRecipe, profitPercent: 30);
 
-    Console.Write("… vendido por unidade? (s/n): ");
-    string isUnit = Console.ReadLine()?.ToLower() ?? "n";
+Console.WriteLine("\n=== RESULTADO ===");
+Console.WriteLine($"Cliente: {customRecipe.ClientName}");
+Console.WriteLine($"Pre√ßo final sugerido: R$ {finalPrice:F2}");
 
-    UnitOfMeasure unit = isUnit == "s" ? UnitOfMeasure.Units : UnitOfMeasure.Kilograms;
+Console.WriteLine("\n=== FIM DO TESTE ===");
 
-    Console.Write("PreÁo do pacote (se for unidade, preÁo do pacote): ");
-    decimal price = decimal.Parse(Console.ReadLine()!, CultureInfo.InvariantCulture);
-
-    Console.Write(isUnit == "s"
-        ? "Quantas unidades existem no pacote? "
-        : "Peso do pacote em kg: ");
-
-    decimal amount = decimal.Parse(Console.ReadLine()!, CultureInfo.InvariantCulture);
-
-    var ingredient = new Ingredient(name,
-        unit == UnitOfMeasure.Kilograms ? price : 0,
-        unit,
-        unit == UnitOfMeasure.Units ? price : 0,
-        unit == UnitOfMeasure.Units ? (int)amount : 1);
-
-    var stockItem = new StockItem(
-        ingredient,
-        unit == UnitOfMeasure.Kilograms ? amount : 0,
-        price);
-
-    stockService.AddStockItem(stockItem);
-
-    Console.WriteLine($"Ingrediente {name} registrado e adicionado ao estoque!");
-}
-
-void RegisterIndirectCost(List<IndirectCost> indirectCosts)
-{
-    Console.WriteLine("\n=== Registrar Custo Indireto Mensal ===");
-
-    Console.Write("DescriÁ„o (ex: aluguel, luz): ");
-    string desc = Console.ReadLine() ?? "";
-
-    Console.Write("Valor mensal: ");
-    decimal value = decimal.Parse(Console.ReadLine()!, CultureInfo.InvariantCulture);
-
-    indirectCosts.Add(new IndirectCost(desc, value));
-
-    Console.WriteLine("Custo indireto registrado com sucesso!");
-}
-
-void RegisterRecipe(List<Recipe> recipes, StockService stock)
-{
-    Console.WriteLine("\n=== Registrar Receita ===");
-
-    Console.Write("Nome da receita: ");
-    string recipeName = Console.ReadLine() ?? "";
-
-    var recipe = new Recipe(recipeName);
-
-    while (true)
-    {
-        Console.WriteLine("\nIngredientes disponÌveis no estoque:");
-        foreach (var item in stock.GetAllStockItems())
-            Console.WriteLine($"- {item.Ingredient.Name}");
-
-        Console.Write("Escolha um ingrediente: ");
-        string ingredientName = Console.ReadLine() ?? "";
-
-        var ingredient = stock.GetIngredientByName(ingredientName);
-        if (ingredient == null)
-        {
-            Console.WriteLine("Ingrediente n„o encontrado!");
-            continue;
-        }
-
-        Console.Write("Quantidade usada (com base na unidade do ingrediente): ");
-        decimal quantity = decimal.Parse(Console.ReadLine()!, CultureInfo.InvariantCulture);
-
-        recipe.AddComponent(new RecipeComponent(ingredient, quantity));
-
-        Console.Write("Adicionar outro ingrediente? (s/n): ");
-        if (Console.ReadLine()?.ToLower() != "s")
-            break;
-    }
-
-    recipes.Add(recipe);
-    Console.WriteLine($"Receita {recipeName} registrada com sucesso!");
-}
-
-void PriceRecipe(List<Recipe> recipes, StockService stock, List<IndirectCost> indirectCosts)
-{
-    Console.WriteLine("\n=== Calcular Custo da Receita ===");
-
-    Console.Write("Nome da receita: ");
-    string name = Console.ReadLine() ?? "";
-
-    var recipe = recipes.FirstOrDefault(r => r.Name == name);
-
-    if (recipe == null)
-    {
-        Console.WriteLine("Receita n„o encontrada!");
-        return;
-    }
-
-    Console.Write("Qual a produÁ„o total do mÍs (em kg)? ");
-    decimal totalKgMonth = decimal.Parse(Console.ReadLine()!, CultureInfo.InvariantCulture);
-
-    var allocator = new IndirectCostAllocator(indirectCosts, totalKgMonth);
-    var recipeCosts = new RecipeCosts(stock);
-
-    decimal ingredientCost = recipeCosts.CalculateTotalRecipeCost(recipe);
-    decimal indirectCost = allocator.AllocateToRecipe(recipe.GetTotalWeightInKg());
-    decimal total = ingredientCost + indirectCost;
-
-    Console.WriteLine("\n=== Resultado da PrecificaÁ„o ===");
-    Console.WriteLine($"Receita: {recipe.Name}");
-    Console.WriteLine($"Peso total: {recipe.GetTotalWeightInKg()} kg");
-    Console.WriteLine($"Custo dos ingredientes: {ingredientCost:C}");
-    Console.WriteLine($"Custos indiretos alocados: {indirectCost:C}");
-    Console.WriteLine($"Custo total: {total:C}");
-}
-
-void ListAllRecipes(List<Recipe> recipes)
-{
-    Console.WriteLine("\n=== Lista de Receitas Cadastradas ===");
-
-    foreach (var r in recipes)
-    {
-        Console.WriteLine($"- {r.Name} ({r.GetTotalWeightInKg()} kg)");
-    }
-}
 
 // --------------------------------------------//
 
