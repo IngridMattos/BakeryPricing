@@ -1,0 +1,6 @@
+@PrecificacaoConfeitaria.API_HostAddress = http://localhost:5161
+
+GET {{PrecificacaoConfeitaria.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
