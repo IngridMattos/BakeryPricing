@@ -1,0 +1,12 @@
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Application\bin\Debug\net9.0\Application.deps.json
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Application\bin\Debug\net9.0\Application.dll
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Application\bin\Debug\net9.0\Application.pdb
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Application\obj\Debug\net9.0\PrecificacaoConfeitaria.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Application\obj\Debug\net9.0\PrecificacaoConfeitaria.Application.AssemblyInfoInputs.cache
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Application\obj\Debug\net9.0\PrecificacaoConfeitaria.Application.AssemblyInfo.cs
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Application\obj\Debug\net9.0\PrecificacaoConfeitaria.Application.csproj.CoreCompileInputs.cache
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Application\obj\Debug\net9.0\PrecificacaoConfeitaria.Application.sourcelink.json
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Application\obj\Debug\net9.0\Application.dll
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Application\obj\Debug\net9.0\refint\Application.dll
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Application\obj\Debug\net9.0\Application.pdb
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Application\obj\Debug\net9.0\ref\Application.dll

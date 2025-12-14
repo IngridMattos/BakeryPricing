@@ -1,0 +1,12 @@
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Domain\bin\Debug\net9.0\PrecificacaoConfeitaria.Domain.deps.json
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Domain\bin\Debug\net9.0\PrecificacaoConfeitaria.Domain.dll
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Domain\bin\Debug\net9.0\PrecificacaoConfeitaria.Domain.pdb
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Domain\obj\Debug\net9.0\PrecificacaoConfeitaria.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Domain\obj\Debug\net9.0\PrecificacaoConfeitaria.Domain.AssemblyInfoInputs.cache
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Domain\obj\Debug\net9.0\PrecificacaoConfeitaria.Domain.AssemblyInfo.cs
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Domain\obj\Debug\net9.0\PrecificacaoConfeitaria.Domain.csproj.CoreCompileInputs.cache
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Domain\obj\Debug\net9.0\PrecificacaoConfeitaria.Domain.sourcelink.json
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Domain\obj\Debug\net9.0\PrecificacaoConfeitaria.Domain.dll
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Domain\obj\Debug\net9.0\refint\PrecificacaoConfeitaria.Domain.dll
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Domain\obj\Debug\net9.0\PrecificacaoConfeitaria.Domain.pdb
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Domain\obj\Debug\net9.0\ref\PrecificacaoConfeitaria.Domain.dll

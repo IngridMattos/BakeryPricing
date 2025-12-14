@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "6uIakCB9yAg=",
+  "dgSpecHash": "RILNiylKwTI=",
   "success": true,
-  "projectFilePath": "C:\\Users\\ingri\\Estudos\\SistemaDePrecificaçãoConfeitaria\\Backend\\Infrastructure\\Infrastructure.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\ingri\\Estudos\\SistemaDePrecificaçãoConfeitaria\\Backend\\Infrastructure\\PrecificacaoConfeitaria.Infrastructure.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ingri\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\10.0.1\\microsoft.entityframeworkcore.tools.10.0.1.nupkg.sha512"
+  ],
   "logs": []
 }

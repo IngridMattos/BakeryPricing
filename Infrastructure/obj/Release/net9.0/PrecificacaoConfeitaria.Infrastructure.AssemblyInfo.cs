@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PrecificacaoConfeitaria.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2d4f7652ff2cc6324aec41369c52b064a67be9d3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+579b7164f89ecf54aa318ac36bd95889f0a4d6f9")]
 [assembly: System.Reflection.AssemblyProductAttribute("PrecificacaoConfeitaria.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PrecificacaoConfeitaria.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
