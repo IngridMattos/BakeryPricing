@@ -10,3 +10,9 @@ C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Infrastructure
 C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Infrastructure\obj\Debug\net9.0\refint\PrecificacaoConfeitaria.Infrastructure.dll
 C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Infrastructure\obj\Debug\net9.0\PrecificacaoConfeitaria.Infrastructure.pdb
 C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Infrastructure\obj\Debug\net9.0\ref\PrecificacaoConfeitaria.Infrastructure.dll
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Infrastructure\obj\Debug\net9.0\PrecificacaoConfeitaria.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Infrastructure\bin\Debug\net9.0\PrecificacaoConfeitaria.Infrastructure.runtimeconfig.json
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Infrastructure\bin\Debug\net9.0\PrecificacaoConfeitaria.Domain.dll
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Infrastructure\bin\Debug\net9.0\PrecificacaoConfeitaria.Domain.pdb
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Infrastructure\obj\Debug\net9.0\Precific.BEFC7E7C.Up2Date
+C:\Users\ingri\Estudos\SistemaDePrecificaçãoConfeitaria\Backend\Infrastructure\obj\Debug\net9.0\PrecificacaoConfeitaria.Infrastructure.genruntimeconfig.cache
